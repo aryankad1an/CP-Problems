@@ -1,7 +1,6 @@
 #include <iostream>
 
 using namespace std;
-
 void solve(int n, int k, int q[], int e[]){
     
 }
