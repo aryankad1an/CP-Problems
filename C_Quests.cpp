@@ -26,21 +26,29 @@ int main() {
             k = n;
         }
 
+        int initsum = 0;
+        // sum of 0 to i elements of q[n]
+        for(int j = 0; j <= k-1; j++){
+            initsum += q[j];
+        }
+
+        // making an array ecpy which stores the max element of e[n] from 0 to i;
+        int ecpy[n];
+        int max_e = 0;
+        for(int i = 0; i < n; i++){
+            if(e[i] > max_e){
+                max_e = e[i];
+            }
+            ecpy[i] = max_e;
+        }
+
         for(int i = k-1; i >= 0; i--){
             int temp_sum = 0;
-
-            // sum of 0 to i elements of q[n]
-            for(int j = 0; j <= i; j++){
-                temp_sum += q[j];
-            }
+            temp_sum += initsum;
+            initsum -= q[i];
 
             // finding the max of e[n] from 0 to i;
-            int max_e = 0;
-            for(int j = 0; j <= i; j++){
-                if(e[j] > max_e){
-                    max_e = e[j];
-                }
-            }
+            int max_e = ecpy[i];
 
             temp_sum += max_e*allowedretries;
             if(temp_sum > ans){
