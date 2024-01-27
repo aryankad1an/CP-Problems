@@ -17,20 +17,20 @@
 
 using namespace std;
 int main(){
-    int t;
+    long long t;
     cin >> t;
     while(t--){
-        int n;
+        long long n;
         cin >> n;
-        int sum = 0;
+        long long sum = 0;
         while(n--){
-            int x;
+            long long x;
             cin >> x;
             sum += x;
         }
 
         // check if square root of sum is an integer
-        int root = sqrt(sum);
+        long long root = sqrt(sum);
         if(root*root == sum){
             cout << "YES" << endl;
         }
