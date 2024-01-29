@@ -7,12 +7,12 @@ using namespace std;
 #define ll long long
  
  
-/**
+/*
  * This function solves the problem of jumping through segments.
  * It takes input of the number of segments and their start and end points.
  * It uses binary search to find the minimum jump length required to jump through all segments.
  * The function then prints the minimum jump length.
- */
+*/
 void solve()
 {
     ll n,l,r;
