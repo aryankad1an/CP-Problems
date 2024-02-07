@@ -1,78 +1,68 @@
 // Link To Problem : https://codeforces.com/contest/1927/problem/C
-
-
-#include<iostream>
-#include<vector>
-#include<map>
-#include<set>
-#include<algorithm>
+#include <iostream>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
 #define long long long int
-
 using namespace std;
-int main(){
+int main()
+{
     int t;
     cin >> t;
-    while(t--){
+    while (t--)
+    {
         int n, m, k;
         cin >> n >> m >> k;
         set<int> a, b;
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++)
+        {
             int x;
             cin >> x;
             a.insert(x);
         }
-        for(int i = 0; i < m; i++){
+        for (int i = 0; i < m; i++)
+        {
             int x;
             cin >> x;
             b.insert(x);
+        } 
+        // creating hashmap for a and b and initializing the frequency of each element
+        vector<int> freqA(k+1), freqB(k+1);
+        for(int i = 1; i <= k; i++){
+            freqA[i] = 0;
+            freqB[i] = 0;
         }
-        // converting set to vector
-        vector<int> av(a.begin(), a.end());
-        vector<int> bv(b.begin(), b.end());
-        int i = 0, j = 0;
+        for (auto x : a)
+        {
+            if(x >= 1) if(x <= k) freqA[x]++;
+        }
+        for (auto x : b)
+        {
+            if(x>= 1) if(x <= k) freqB[x]++;
+        }
+        int i = 1, j = 1;
         int ct1 = 0, ct2 = 0;
-        int t = 1;
+        int l = k;
         int li = 0;
-        while(t <= k && i < av.size() && j < bv.size()){
-            if(av[i] == t && bv[j] == t){
-                i++;
-                j++;
-                li++;
-                t++;
+        while(l--){
+            if(freqA[i]){
                 ct1++;
+            }
+            if(freqB[j]){
                 ct2++;
             }
-            else{
-                if(av[i] == t){
-                    i++;
-                    ct1++;
-                    t++;
-                }
-                else if(bv[j] == t){
-                    j++;
-                    ct2++;
-                    t++;
-                }
-                else{
-                    i++;
-                    j++;
-                    t++;
-                }
+            if(freqA[i] && freqB[j]){
+                li++;
             }
+            i++;j++;
         }
-        if(ct1 < k/2 || ct2 < k/2){
-            cout << "NO" << endl;
+        if((ct1-(k/2))+(ct2-(k/2)) == li && (ct1-(k/2)) >= 0 && (ct2-(k/2)) >= 0){
+            cout << "YES" << endl;
         }
         else{
-            int n = ct1 - k/2;
-            int m = ct2 - k/2;
-            if(n+m == li){
-                cout << "YES" << endl;
-            }
-            else{
-                cout << "NO" << endl;
-            }
-        }        
+            cout << "NO" << endl;
+        }
     }
     return 0;
 }
