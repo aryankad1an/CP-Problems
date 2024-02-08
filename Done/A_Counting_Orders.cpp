@@ -13,7 +13,7 @@ int main(){
     int t;
     cin >> t;
     while(t--){
-        int n;
+        long n;
         cin >> n;
         vector<int> a(n);
         vector<int> b(n);
@@ -23,10 +23,22 @@ int main(){
         for(int i = 0; i < n; i++){
             cin >> b[i];
         }
-        sort (a.begin(), a.end());
-        sort (b.begin(), b.end());
+        sort (a.rbegin(), a.rend());
+        sort (b.rbegin(), b.rend());
+                                
 
-        
+        long i = 0, j = 0, li = 0, ans = 1;
+        while(j<n){
+            if(a[i] > b[j] && i < n){
+                i++;
+            }
+            else{
+                ans = (ans * (i-li)) % 1000000007;
+                li++;
+                j++;
+            }
+        }
+        cout << ans << endl;
 
     }
     return 0;
