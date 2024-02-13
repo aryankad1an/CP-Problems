@@ -27,6 +27,7 @@ int main(){
             while(a[i] - a[pnt] >= n) {
                 pnt++;
             }
+            // this is the number of elements in the range [pnt, i] that are less than n
             ans = max(ans, i - pnt + 1);
         }
         cout << ans << endl;     
