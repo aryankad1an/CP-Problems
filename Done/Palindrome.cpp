@@ -10,6 +10,8 @@ using namespace std;
 /*
 PROBLEM: Given a string s and Q queries, each query is of the form (l,r) where l and r are the starting and ending index of the string s, you have to tell whether the substring s[l,r] can be rearranged to form a palindrome or not.
 */
+const int N = 1e5+10;
+int hsh[N][26];
 int main(){
     int t;
     cin >> t;
@@ -18,19 +20,31 @@ int main(){
         cin >> n >> q;
         string s;
         cin >> s;
+        // reset the hash array
+        for(int i = 0 ; i < N ; i++) {
+            for(int j = 0 ; j < 26 ; j++) {
+                hsh[i][j] = 0;
+            }
+        }
+        // precompute the frequency of each character in the string
+        for(int i = 0 ; i < n ; i++) {
+            hsh[i+1][s[i]-'a']++;
+        }
+        // prefix sum of the frequency of each character
+        for(int i = 1 ; i <= n ; i++) {
+            for(int j = 0 ; j < 26 ; j++) {
+                hsh[i][j] += hsh[i-1][j];
+            }
+        }
         while(q--){
             int l, r;
             cin >> l >> r;
-            // 1-based to 0-based indexing
-            l--, r--;
-            // we will use a frequency array to store the frequency of each character in the string s
-            vector < int > freq(26, 0);
-            for(int i = l ; i <= r ; i++) {
-                freq[s[i]-'a']++;
-            }
+            
+           
             int odd = 0;
             for(int i = 0 ; i < 26 ; i++) {
-                if(freq[i]%2) {
+                int charCt = hsh[r][i] - hsh[l-1][i];
+                if(charCt % 2 !=0) {
                     odd++;
                 }
             }
