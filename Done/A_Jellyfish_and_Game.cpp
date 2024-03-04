@@ -10,11 +10,11 @@
 
 using namespace std;
 int main(){
-    long t;
-    cin >> t;
-    while(t--){
-        long n, m, k;
-        cin >> n >> m >> k;
+    long k;
+    cin >> k;
+    while(k--){
+        long n, m, t;
+        cin >> n >> m >> t;
         vector<long> a(n);
         for (long i = 0; i < n; i++)
         {
@@ -27,11 +27,25 @@ int main(){
         }
         sort(a.begin(), a.end());
         sort(b.begin(), b.end());
+
+
         // first move, swap a[0] with b[m-1]
         if(a[0] < b[m-1]) swap(a[0], b[m-1]);
-        k--;
-        if(k%2==0){
-            // cout sum of elements of a
+        t--;
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
+        // second move, swap a[n-1] with b[0]
+        if(t>0){
+            if(a[n-1] > b[0]){
+                swap(a[n-1], b[0]);
+                sort(a.begin(), a.end());
+                sort(b.begin(), b.end());
+            }
+            t--;
+        }
+        
+        // now cyclic moves
+        if(t%2==0){
             long sum = 0;
             for (long i = 0; i < n; i++)
             {
@@ -40,8 +54,9 @@ int main(){
             cout << sum << endl;
         }
         else{
-            // swap b[m] with a[0] 
-            swap(b[m-1], a[0]);
+            if(b[m-1] > a[0]){
+                swap(b[m-1], a[0]);
+            }
             long sum = 0;
             for (long i = 0; i < n; i++)
             {
@@ -49,7 +64,6 @@ int main(){
             }
             cout << sum << endl;
         }
-
         
     }
     
