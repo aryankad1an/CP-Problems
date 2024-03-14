@@ -49,9 +49,6 @@ int main(){
             ans = min(ans, max(dawg, dp[1]));
         }
         cout << ans << endl;
-        // cout << "------------------------" << endl;
-        // cout << "------------------------" << endl;
-
 
     }
     return 0;

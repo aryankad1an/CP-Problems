@@ -19,7 +19,7 @@ int32_t main(){
 		cin >> s;
 		s=' '+s;
 		int ans=0;
-        // credits: Second_Brave_Niuniu
+        // Sieve's Approach
 		for(int i=1;i<=n;i++)
 		{
 			for(int j=i;j<=n;j+=i)
