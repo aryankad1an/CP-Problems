@@ -1,4 +1,4 @@
-// Link To Problem : https://www.youtube.com/watch?v=St_7s5FDn1A
+// Link To Problem : https://codeforces.com/problemset/problem/1917/B
 
 
 #include<iostream>
@@ -6,29 +6,30 @@
 #include<map>
 #include<set>
 #include<algorithm>
-#define long long long int
+#define int long long
 
 using namespace std;
-int main(){
+int32_t main(){
     int t;
     cin >> t;
     while(t--){
-        int n;
+        int n; 
         cin >> n;
         string s;
-        cin >> s;
-        // a prefix array storing no. of unique characters in the string till an index o
-        vector<int> prefix(s.size(),0);
-        set<char> st;
+        cin>>s;
+        set<int> st;
         for(int i=0;i<s.size();i++){
             st.insert(s[i]);
-            prefix[i] = st.size();
         }
-        int count = 0;
-        for(int i=0;i<s.size();i++){
-            count += prefix[i];
+        int ans = 0;
+        for(int i=0; i<s.size(); i++){
+            // check if s[i] is in set
+            if(st.find(s[i])!=st.end()){
+                ans += (n-i);
+                st.erase(s[i]);
+            }
         }
-        cout << count << endl;
+        cout << ans << endl;
     }
     return 0;
 }
